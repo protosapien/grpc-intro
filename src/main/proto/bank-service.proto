@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.datasciencegroup.grpc.two.models";
+
+
+message BalanceCheckRequest{
+  int32 account_number = 1;
+}
+
+// USD
+message Balance{
+  int32 amount = 1;
+}
+
+
+// From Section 04 : gRPC - Server Streaming RPC
+
+// add new withdraw request
+message WithdrawRequest{
+  int32 account_number = 1;
+  int32 amount = 2;
+}
+
+// withdraw money response
+message Money{
+  int32 value = 1;
+}
+
+message DepositRequest{
+  int32 account_number = 1;
+  int32 amount = 2;
+}
+
+service BankService{
+
+  // unary
+  rpc getBalance(BalanceCheckRequest) returns (Balance);
+
+  // server-side streaming
+  rpc withdraw(WithdrawRequest) returns (stream Money);
+
+  // client-side streaming
+  rpc cashDeposit(stream DepositRequest) returns (stream Balance);
+
+}
