@@ -13,6 +13,10 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
 
         int accountNumber = request.getAccountNumber();
 
+        System.out.println(
+                "\tReceived the request for " + accountNumber
+        );
+
         // we arbitrarily and artificially set the amount based acct numb.
         // Totally bogus but will do for now
         Balance balance = Balance.newBuilder()
