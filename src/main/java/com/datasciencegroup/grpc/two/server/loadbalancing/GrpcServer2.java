@@ -14,7 +14,7 @@ public class GrpcServer2 {
                 .build();
 
         server.start();
-        System.out.println("\n\tserver started.....");
+        System.out.println("\n\tserver 2 started.....");
         server.awaitTermination();
 
     }
