@@ -20,11 +20,9 @@ public class BankClientTest {
 
     @BeforeAll
     public void setup() {
-        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 6565)
+        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("192.168.1.146", 6565)
                 .usePlaintext()
                 .build();
-
-
         this.blockingStub = BankServiceGrpc.newBlockingStub(managedChannel);
         this.bankServiceStub = BankServiceGrpc.newStub(managedChannel);
 
