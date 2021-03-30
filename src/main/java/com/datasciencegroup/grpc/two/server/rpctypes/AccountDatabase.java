@@ -1,6 +1,7 @@
 package com.datasciencegroup.grpc.two.server.rpctypes;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,10 +21,10 @@ public class AccountDatabase {
      */
 
     private static final Map<Integer, Integer> MAP = IntStream
-            .range(1, 11) // this is simple for-loop
+            .range(1, 10001) // this is simple for-loop
             .boxed()
             .collect(Collectors.toMap(
-                    Function.identity(), v -> 100)
+                    Function.identity(), v -> ThreadLocalRandom.current().nextInt(10, 1500))
             );
 
     public static int getBalance(int accountId) {

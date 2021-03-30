@@ -19,11 +19,10 @@ public class NginxTestClient {
 
     @BeforeAll
     public void setup() {
-        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8585)
+        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("192.168.1.146", 8585)
                 .usePlaintext()
                 .build();
         this.blockingStub = BankServiceGrpc.newBlockingStub(managedChannel);
-
     }
 
     @Test
@@ -38,7 +37,6 @@ public class NginxTestClient {
 
             System.out.println(
                     "\n\tBalance : " + balance.getAmount() + " for Account Number " + balanceCheckRequest.getAccountNumber()
-
             );
         }
     }
