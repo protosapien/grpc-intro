@@ -1,6 +1,5 @@
 package com.datasciencegroup.grpc.two.client.loadbalancing;
 
-
 import com.datasciencegroup.grpc.two.models.Balance;
 import com.datasciencegroup.grpc.two.models.BalanceCheckRequest;
 import com.datasciencegroup.grpc.two.models.BankServiceGrpc;
@@ -19,7 +18,7 @@ public class NginxTestClient {
 
     @BeforeAll
     public void setup() {
-        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 8585)
+        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("192.168.1.146", 8585)
                 .usePlaintext()
                 .build();
         this.blockingStub = BankServiceGrpc.newBlockingStub(managedChannel);
@@ -29,7 +28,9 @@ public class NginxTestClient {
     @Test
     public void balanceTest() throws InterruptedException {
 
-        for (int i = 0; i < 11; i++) {
+        System.out.println("\n\tResponse Output.....\n");
+
+        for (int i = 1; i < 5001; i++) {
 
             BalanceCheckRequest balanceCheckRequest = BalanceCheckRequest.newBuilder()
                     .setAccountNumber(i)
@@ -37,8 +38,7 @@ public class NginxTestClient {
             Balance balance = this.blockingStub.getBalance(balanceCheckRequest);
 
             System.out.println(
-                    "\n\tBalance : " + balance.getAmount() + " for Account Number " + balanceCheckRequest.getAccountNumber()
-
+                    "\tBalance is " + balance.getAmount() + " for Account Number " + balanceCheckRequest.getAccountNumber()
             );
         }
     }
